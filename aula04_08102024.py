@@ -60,5 +60,11 @@ meses= ( 1: "Janeiro",2: "Fevereiro")
 # Aprovado: média >= 6.0, Reprovado: média < 3.0, Exame: média >= 3.0 e < 6.0;
 
 # 6) Escreva um programa para ler um valor e escrever se é positivo ou negativo. Considere o valor zero como positivo.
+valor = float(input("Digite um número: "))
+
+if valor >= 0:
+    print("O número é positivo.")
+else:
+    print("O número é negativo.")
 
 

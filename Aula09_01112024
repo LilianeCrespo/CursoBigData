@@ -1,0 +1,80 @@
+import numpy as np
+import pandas as pd
+#Recapitulando:
+
+amostra=np.array([2500,3200,2700,3000,3400,3700,4500,4700,5000,5200,6000,7000])
+media=np.mean(amostra)
+mediana=np.median(amostra)
+distancia=(media-mediana)/mediana*100
+q1=np.percentile(amostra,25) 
+q2=np.percentile(amostra,50) 
+q3=np.percentile(amostra,75)
+iqr=q3-q1
+limite_superior=q3+(1.5*iqr)
+limite_inferior=q1-(1.5*iqr)
+
+#Exibição Estatística:
+
+print(f'Média: {media}')
+print(f'Mediana: {mediana}')
+print (f'Distância entre média e mediana: {distancia:.2f}%')
+print(f"Primeiro Quartil (Q1):{q1}")
+print(f"Segundo Quartil (Q2):{q2}")
+print(f"Terceiro Quartil (Q3):{q3}")
+print(f"Intervalo InterQuartil:{iqr}")
+print(f"Limite Superior:{limite_superior}")
+print(f"Limite Inferior:{limite_inferior}")
+Média: 4241.666666666667
+Mediana: 4100.0
+Distância entre média e mediana: 3.46%
+Primeiro Quartil (Q1):3150.0
+Segundo Quartil (Q2):4100.0
+Terceiro Quartil (Q3):5050.0
+Intervalo InterQuartil:1900.0
+Limite Superior:7900.0
+Limite Inferior:300.0
+amostra_df=pd.DataFrame(amostra, columns=['Valores'])
+print(amostra_df)
+    Valores
+0      2500
+1      3200
+2      2700
+3      3000
+4      3400
+5      3700
+6      4500
+7      4700
+8      5000
+9      5200
+10     6000
+11     7000
+#Medidas de Dispersão
+valor_maximo=amostra_df['Valores'].max()
+valor_minimo=amostra_df['Valores'].min()
+amplitude_total=valor_maximo-valor_minimo
+
+print(f'Menor Valor:{valor_minimo}')
+print(f'Maior Valor:{valor_maximo}')
+print(f'Amplitude:{amplitude_total}')
+Menor Valor:2500
+Maior Valor:7000
+Amplitude:4500
+Visualização do BoxPlot e Medidas:
+
+import matplotlib.pyplot as plt
+#configuração do painel
+fig,ax=plt.subplots(1,2,figsize=(12,6))
+
+#Boxplot
+ax[0].boxplot(amostra_df['Valores'])
+ax[0].set_title('Distribuição de Dados - Boxplot')
+ax[0].set_ylabel('Valores')
+
+#Exibindo as Medidas
+ax[1].text(0.1,0.8,f"Menor Valor:{valor_minimo}")
+ax[1].text(0.1,0.7,f"Maior Valor:{valor_maximo}")
+ax[1].text(0.1,0.6,f"Amplitude Total:{amplitude_total}")
+ax[1].set_axis_off()
+
+plt.tight_layout()
+plt.show()
